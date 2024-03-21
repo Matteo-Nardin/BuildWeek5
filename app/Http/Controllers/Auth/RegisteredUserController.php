@@ -40,7 +40,7 @@ class RegisteredUserController extends Controller
         $user->name = $request->name;
         $user->email = $request->email;
         $user->password = Hash::make($request->password);
-        $user->user_role = 'normal_user'; // Imposta manualmente il ruolo dell'utente
+        $user->user_role = 'user'; // Imposta manualmente il ruolo dell'utente
         $user->save();
 
         event(new Registered($user));
