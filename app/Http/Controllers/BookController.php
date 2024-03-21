@@ -13,7 +13,16 @@ class BookController extends Controller
      */
     public function index()
     {
-        //
+        //libri con le prenotazioni formato API
+        //return Book::with('bookReservation')->get();
+
+        //solo i libri formati API
+        //return Book::get();
+
+        //libri passati alla vista book, tramite varibalile bookList
+        $bookList = Book::get();
+        return view('books' , ['bookList' => $bookList]);
+
     }
 
     /**
