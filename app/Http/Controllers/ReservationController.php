@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Book;
 use App\Models\Reservation;
 use App\Http\Requests\StoreReservationRequest;
 use App\Http\Requests\UpdateReservationRequest;
+use Illuminate\Foundation\Auth\User;
 
 class ReservationController extends Controller
 {
@@ -13,7 +15,12 @@ class ReservationController extends Controller
      */
     public function index()
     {
-        //
+        $reservations = Reservation::with('reservationBook', 'reservationUser')->get();
+            
+        $users = User::all();
+        $books = Book::all();
+            
+        return view("viewReservation", ['users' => $users, 'books' => $books, 'reservations' => $reservations]);
     }
 
     /**
