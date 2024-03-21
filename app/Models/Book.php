@@ -13,6 +13,6 @@ class Book extends Model
     use HasFactory;
 
     public function bookReservation(): HasMany {
-        return $this->hasMany(Book::class);
+        return $this->hasMany(Reservation::class);
     }
 }
