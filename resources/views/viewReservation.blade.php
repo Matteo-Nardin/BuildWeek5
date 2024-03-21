@@ -18,12 +18,12 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach($reservations as $reservation)
+                @foreach($reservation as $res)
                     <tr>
                         <th scope="row">{{ $loop->iteration }}</th>
-                        <td>{{ $reservation->book->title }}</td>
-                        <td>{{ $reservation->user->name }}</td>
-                        <td>{{ $reservation->status }}</td>
+                        <td>{{ $res->reservationBook->title }}</td>
+                        <td>{{ $res->reservationUser->name }}</td>
+                        <td>{{ $res->status }}</td>
                     </tr>
                 @endforeach
             </tbody>

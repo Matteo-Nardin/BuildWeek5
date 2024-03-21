@@ -7,6 +7,7 @@ use App\Models\Reservation;
 use App\Http\Requests\StoreReservationRequest;
 use App\Http\Requests\UpdateReservationRequest;
 use Illuminate\Foundation\Auth\User;
+use Illuminate\Support\Facades\Auth;
 
 class ReservationController extends Controller
 {
@@ -15,12 +16,12 @@ class ReservationController extends Controller
      */
     public function index()
     {
-        $reservations = Reservation::with('reservationBook', 'reservationUser')->get();
-            
-        $users = User::all();
-        $books = Book::all();
-            
-        return view("viewReservation", ['users' => $users, 'books' => $books, 'reservations' => $reservations]);
+        if (Auth::user()->user_role === 'admin') {
+        $reservation = Reservation::with('reservationBook', 'reservationUser')->get();
+        return view("viewReservation", ['reservation' => $reservation]);
+        } else {
+            return redirect()->route('book.index')->with('error', 'You are not authorized to access this page.');
+        }
     }
 
     /**
