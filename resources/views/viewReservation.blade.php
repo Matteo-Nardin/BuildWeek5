@@ -29,13 +29,13 @@
                                 @method('PATCH')
                                 <input type="hidden" name="reservation" value="{{ $res->id }}">
                                 <input type="hidden" name="book_id" value="{{ $res->reservationBook->id }}">
-                                <button type="submit" class="btn btn-danger"><i class="bi bi-trash"></i></button>
+                                <button type="submit" class="btn btn-danger text-dark"><i class="bi bi-trash"></i></button>
                             </form><td>
                         <td>
                         <form method="POST" action="{{ route('reservation.destroy', $res->id) }}">
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit" class="btn btn-danger" onclick="return confirm('Sei sicuro di voler eliminare definitivamente questa prenotazione?')">!Destroy!</button>
+                                <button type="submit" class="btn btn-danger text-warning" onclick="return confirm('Sei sicuro di voler eliminare definitivamente questa prenotazione?')">!Destroy!</button>
                             </form>
                         </td>
                         </tr>
