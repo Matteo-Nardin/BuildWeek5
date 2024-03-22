@@ -38,14 +38,22 @@ class ReservationController extends Controller
     public function store(StoreReservationRequest $request)
     {
         $user_id = auth()->user()->id;
+        $book = Book::find($request->book_id);
 
+        if ($book->copies_available > 0) {
         $reservation = new Reservation();
         $reservation->status = 'effettuata';
-        $reservation->book_id = $request->book_id;
+        $reservation->book_id = $book->id;
         $reservation->user_id = $user_id;
         $reservation->save();
 
+        $book->decrement('copies_available');
+
         return redirect()->back()->with('success', 'Reservation has been made successfully.');
+
+        } else {
+            return redirect()->back()->with('error', 'No copies available for reservation.');
+        }
     }
 
     /**
@@ -69,14 +77,25 @@ class ReservationController extends Controller
      */
     public function update(UpdateReservationRequest $request, Reservation $reservation)
     {
-        $user_id = auth()->user()->id;
+        if($reservation->status == 'cancellata') {
+            $user_id = auth()->user()->id;
+            $book = Book::find($request->book_id);
 
-        $reservation['reservation_id'] = $request->status = 'effettuata';
+            $reservation->status = 'effettuata';
+            $reservation->save();
+            $book->decrement('copies_available');
 
-        $reservation->update();
+            return redirect()->back()->with('success', 'Reservation has been made successfully.');
+        } else {
+            $user_id = auth()->user()->id;
+            $book = Book::find($request->book_id);
 
-        return redirect()->back()->with('success', 'Reservation has been made successfully.');
+            $reservation->status = 'cancellata';
+            $reservation->save();
+            $book->increment('copies_available');
 
+            return redirect()->back()->with('success', 'Reservation has been made successfully.');
+        }
     }
 
     /**

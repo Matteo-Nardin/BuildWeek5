@@ -26,32 +26,25 @@
                         <td>{{$book->copies_available}}</td>
                         <td>{{$book->description}}</td>
                         <td>
-                            @if ($user && !$reservation)
+                            @if (!$reservation)
                                 <form method="POST" action="{{ route('reservation.store') }}">
                                     @csrf
                                     <input type="hidden" name="book_id" value="{{ $book->id }}">
                                     <button type="submit" class="btn btn-primary">Prenota</button>
                                 </form>
                             @elseif ($reservation)
+                                @if($reservation->status == 'effettuata')
                                 <p>Libro già prenotato.</p>
-                            @elseif ($reservation->status == 'cancellata')
-                                <form method="POST" action="{{ route('reservation.update') }}">
+                                @else
+                                <form method="POST" action="{{ route('reservation.update', ['reservation' => $reservation->id]) }}">
                                     @csrf
                                     @method('PATCH')
-                                    <input type="hidden" name="reservation_id" value="{{ $book->id }}">
+                                    <input type="hidden" name="reservation" value="{{ $reservation->id }}">
+                                    <input type="hidden" name="book_id" value="{{ $book->id }}">
                                     <button type="submit" class="btn btn-primary">Prenota</button>
                                 </form>
-                            @else
-                                <p>Please login to book this course.</p>
+                                @endif
                             @endif
-                        </td>
-                        <td>
-                            <form method="post" action="/book/{{$book->id}}">
-                                @csrf
-                                @method('PUT')
-                                <input type="hidden" name="copies_available" value="{{ $book->copies_available-1 }}">
-                                <button type="submit" class="btn btn-primary">chat</button>
-                            </form>
                         </td>
                     </tr>
             </tbody>
