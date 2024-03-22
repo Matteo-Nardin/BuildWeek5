@@ -77,25 +77,23 @@ class ReservationController extends Controller
      */
     public function update(UpdateReservationRequest $request, Reservation $reservation)
     {
+
+        $book = Book::find($request->book_id);
+
         if($reservation->status == 'cancellata') {
-            $user_id = auth()->user()->id;
-            $book = Book::find($request->book_id);
 
             $reservation->status = 'effettuata';
             $reservation->save();
             $book->decrement('copies_available');
 
-            return redirect()->back()->with('success', 'Reservation has been made successfully.');
         } else {
-            $user_id = auth()->user()->id;
-            $book = Book::find($request->book_id);
 
             $reservation->status = 'cancellata';
             $reservation->save();
             $book->increment('copies_available');
 
-            return redirect()->back()->with('success', 'Reservation has been made successfully.');
         }
+        return redirect()->back()->with('success', 'Reservation has been made successfully.');
     }
 
     /**

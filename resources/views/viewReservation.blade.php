@@ -30,7 +30,7 @@
                                 <input type="hidden" name="reservation" value="{{ $res->id }}">
                                 <input type="hidden" name="book_id" value="{{ $res->reservationBook->id }}">
                                 <button type="submit" class="btn btn-danger"><i class="bi bi-trash"></i></button>
-                            </form>
+                            </form><td>
                         </tr>
                 @endforeach
             </tbody>

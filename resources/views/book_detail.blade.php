@@ -34,7 +34,13 @@
                                 </form>
                             @elseif ($reservation)
                                 @if($reservation->status == 'effettuata')
-                                <p>Libro già prenotato.</p>
+                                    <td><form method="POST" action="{{ route('reservation.update', ['reservation' => $reservation->id]) }}">
+                                        @csrf
+                                        @method('PATCH')
+                                        <input type="hidden" name="reservation" value="{{ $reservation->id }}">
+                                        <input type="hidden" name="book_id" value="{{ $book->id }}">
+                                        <button type="submit" class="btn btn-danger">Annulla</button>
+                                    </form><td>
                                 @else
                                 <form method="POST" action="{{ route('reservation.update', ['reservation' => $reservation->id]) }}">
                                     @csrf
