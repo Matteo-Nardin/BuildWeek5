@@ -42,6 +42,7 @@
                 @endforeach
             </tbody>
         </table>
+        {{ $reservation->links() }}
     </main>
     
 </x-app-layout>

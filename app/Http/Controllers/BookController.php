@@ -20,7 +20,7 @@ class BookController extends Controller
         //return Book::get();
 
         //libri passati alla vista book, tramite varibalile bookList
-        $bookList = Book::get();
+        $bookList = Book::paginate(4);
         return view('books' , ['bookList' => $bookList]);
 
     }

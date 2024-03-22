@@ -30,6 +30,7 @@
                 @endforeach
             </tbody>
         </table>
+        {{ $bookList->links() }}
     </main>
 
 

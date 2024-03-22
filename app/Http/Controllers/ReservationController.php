@@ -17,7 +17,7 @@ class ReservationController extends Controller
     public function index()
     {
         if (Auth::user()->user_role === 'admin') {
-        $reservation = Reservation::with('reservationBook', 'reservationUser')->get();
+        $reservation = Reservation::with('reservationBook', 'reservationUser')->paginate(4);
         return view("viewReservation", ['reservation' => $reservation]);
         } else {
             return redirect()->route('book.index')->with('error', 'You are not authorized to access this page.');
