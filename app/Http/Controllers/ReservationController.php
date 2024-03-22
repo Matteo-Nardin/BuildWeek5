@@ -100,7 +100,16 @@ class ReservationController extends Controller
      * Remove the specified resource from storage.
      */
     public function destroy(Reservation $reservation)
-    {
-        //
+{
+    // Assicurati che l'utente abbia il diritto di cancellare la prenotazione
+    if (Auth::id() == $reservation->user_id || Auth::user()->user_role === 'admin') {
+        $book = Book::find($reservation->book_id);
+        $book->increment('copies_available');
+        $reservation->delete();
+
+        return redirect()->back()->with('success', 'Reservation has been successfully deleted.');
+    } else {
+        return redirect()->back()->with('error', 'You do not have permission to delete this reservation.');
     }
+}
 }
