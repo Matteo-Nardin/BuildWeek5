@@ -1,11 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Books</title>
-</head>
-<body>
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
@@ -23,6 +15,7 @@
                     <th scope="col">Book Title</th>
                     <th scope="col">Author</th>
                     <th scope="col">Aviable Copies</th>
+                    <th scope="col">Aviable Copies</th>
                 </tr>
             </thead>
             <tbody>
@@ -32,6 +25,7 @@
                         <td>{{$book->title}}</td>
                         <td>{{$book->author}}</td>
                         <td>{{$book->copies_available}}</td>
+                        <td><a href="/book/{{$book->id}}"><i class="bi bi-ticket-detailed"></i></a></td>
                     </tr>
                 @endforeach
             </tbody>
@@ -40,5 +34,4 @@
 
 
 </x-app-layout>
-</body>
-</html>
+

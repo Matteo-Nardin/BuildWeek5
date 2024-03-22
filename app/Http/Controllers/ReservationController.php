@@ -37,7 +37,15 @@ class ReservationController extends Controller
      */
     public function store(StoreReservationRequest $request)
     {
-        //
+        $user_id = auth()->user()->id;
+
+        $reservation = new Reservation();
+        $reservation->status = 'effettuata';
+        $reservation->book_id = $request->book_id;
+        $reservation->user_id = $user_id;
+        $reservation->save();
+
+        return redirect()->back()->with('success', 'Reservation has been made successfully.');
     }
 
     /**
@@ -53,7 +61,7 @@ class ReservationController extends Controller
      */
     public function edit(Reservation $reservation)
     {
-        //
+       //
     }
 
     /**
@@ -61,7 +69,14 @@ class ReservationController extends Controller
      */
     public function update(UpdateReservationRequest $request, Reservation $reservation)
     {
-        //
+        $user_id = auth()->user()->id;
+
+        $reservation['reservation_id'] = $request->status = 'effettuata';
+
+        $reservation->update();
+
+        return redirect()->back()->with('success', 'Reservation has been made successfully.');
+
     }
 
     /**

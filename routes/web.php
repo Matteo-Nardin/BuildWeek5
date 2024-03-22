@@ -32,6 +32,7 @@ Route::middleware('auth')->group(function () {
 
 
 Route::resource('/book', BookController::class)->middleware(['auth', 'verified']);
+// Route::post('/book', [BookController::class, 'reserveBook'])->name('book.reserveBook');
 
 Route::resource('/reservation', ReservationController::class)->middleware('auth');
 
