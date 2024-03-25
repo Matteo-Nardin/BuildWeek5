@@ -27,6 +27,9 @@ class BookController extends Controller
         //solo i libri formati API
         //return Book::get();
 
+
+        
+
         //libri passati alla vista book, tramite varibalile bookList
         $bookList = Book::paginate(8);
         return view('books' , ['bookList' => $bookList]);

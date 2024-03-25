@@ -23,6 +23,7 @@
 
         <table class="table">
             <thead>
+                
                 <tr>
                     <th scope="col">#</th>
                     <th scope="col">Titolo Libro</th>
@@ -32,6 +33,7 @@
                 </tr>
             </thead>
             <tbody>
+                
                 @foreach ($bookList as $book)
                     <tr>
                         <th scope="row">{{ $loop->iteration }}</th>
@@ -67,22 +69,43 @@ document.getElementById('book-search').addEventListener('input', function() {
 
     fetch(`http://127.0.0.1:8000/books/search?query=${(query)}`)
 
-        .then(response => response.json())
-        .then(books => {
-            console.log(books);
-            const resultsContainer = document.getElementById('book-search-results');
-            resultsContainer.innerHTML = ''; // Pulisci i risultati precedenti
-            books.forEach(book => {
-            const div = document.createElement('div');
-            div.textContent = book.title; // Assumi che ogni libro abbia un titolo
-            div.style.cursor = 'pointer';
-            div.addEventListener('click', () => {
-            window.location.href = `/book/${book.id}`; // Usa l'URL definito nella route
-    });
-    resultsContainer.appendChild(div);
-});
 
+
+    .then(response => response.json())
+        .then(books => {
+            const tableBody = document.querySelector('.table tbody');
+            tableBody.innerHTML = ''; // Pulisci la tabella dai risultati precedenti
+
+            // Aggiungi i nuovi risultati della ricerca alla tabella
+            books.forEach((book, index) => {
+                const row = tableBody.insertRow();
+                row.insertCell(0).innerHTML = index + 1; // o un altro identificatore unico se preferisci
+                row.insertCell(1).textContent = book.title;
+                row.insertCell(2).textContent = book.author;
+                row.insertCell(3).innerHTML = `<div class="text-center">${book.copies_available}</div>`;
+                row.insertCell(4).innerHTML = `<a href="/book/${book.id}"><i class="bi bi-ticket-detailed"></i></a>`;
+            });
         })
+
+
+
+//         .then(response => response.json())
+//         .then(books => {
+//             console.log(books);
+//             const resultsContainer = document.getElementById('book-search-results');
+//             resultsContainer.innerHTML = ''; // Pulisci i risultati precedenti
+//             books.forEach(book => {
+//             const div = document.createElement('div');
+//             div.textContent = book.title; // Assumi che ogni libro abbia un titolo
+//             div.style.cursor = 'pointer';
+//             div.addEventListener('click', () => {
+//             window.location.href = `/book/${book.id}`; // Usa l'URL definito nella route
+//     });
+//     resultsContainer.appendChild(div);
+// });
+
+
+//         })
         .catch(error => console.error('Errore:', error));
 });
 
