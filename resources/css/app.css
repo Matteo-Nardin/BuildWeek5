@@ -1,3 +1,44 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+p {
+ color: white !important;   
+}
+
+i {
+    color: black;
+}
+
+footer {
+    box-shadow: 6px -5px 5px 0px #c1effd;
+}
+
+h2:first-of-type {
+    color: #0096c7;
+}
+
+.btn-primary {
+    background-color: #0096c7;
+}
+
+.btn-primary:hover {
+    background-color: #047aa1;
+}
+
+.btn-danger {
+    background-color: rgb(203, 55, 55);
+}
+
+.btn-danger:hover {
+    background-color: rgb(161, 51, 51);
+}
+
+.btn-warning {
+    background-color :#ffc107
+}
+
+.btn-warning:hover {
+    background-color :#e3ac06
+}
+
