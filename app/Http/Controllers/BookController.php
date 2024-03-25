@@ -133,7 +133,7 @@ class BookController extends Controller
         if (!empty($query)) {
             $books = Book::where('title', 'LIKE', "%{$query}%")
                          ->orWhere('author', 'LIKE', "%{$query}%")
-                         ->get();
+                         ->paginate(8);
         } else {
             $books = []; // Restituisci un array vuoto se non c'è una query
         }
