@@ -37,4 +37,7 @@ Route::resource('/book', BookController::class)->middleware(['auth', 'verified']
 Route::resource('/reservation', ReservationController::class)->middleware('auth');
 
 
+//rotta per il fetch di ricerca
+Route::get('/books/search', [BookController::class, 'search']);
+
 require __DIR__.'/auth.php';

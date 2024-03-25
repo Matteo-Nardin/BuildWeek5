@@ -5,6 +5,14 @@ namespace App\Http\Controllers;
 use App\Models\Book;
 use App\Http\Requests\StoreBookRequest;
 use App\Http\Requests\UpdateBookRequest;
+use App\Models\Reservation;
+use Exception;
+use Illuminate\Http\Request; // Per `Request`
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log; // Per `Log`
+
+use Illuminate\Support\Facades\Response; // Opzionale, solo se vuoi usare Response::json(), ma `response()` helper è disponibile globalmente
+
 
 class BookController extends Controller
 {
@@ -20,7 +28,7 @@ class BookController extends Controller
         //return Book::get();
 
         //libri passati alla vista book, tramite varibalile bookList
-        $bookList = Book::paginate(4);
+        $bookList = Book::paginate(8);
         return view('books' , ['bookList' => $bookList]);
 
     }
@@ -112,4 +120,25 @@ class BookController extends Controller
         // Restituisci una risposta di successo
         return back()->with('success', 'Libro prenotato con successo!');
     }
+
+
+
+    public function search(Request $request) {
+        $query = $request->input('query');
+        Log::info("Query ricevuta: {$query}"); // Aggiunto per debug
+    
+        if (!empty($query)) {
+            $books = Book::where('title', 'LIKE', "%{$query}%")
+                         ->orWhere('author', 'LIKE', "%{$query}%")
+                         ->get();
+        } else {
+            $books = []; // Restituisci un array vuoto se non c'è una query
+        }
+        
+        Log::info("Libri trovati: " . json_encode($books));
+        
+        return response()->json($books); // Aggiungi questa linea
+    }
+    
+
 }
