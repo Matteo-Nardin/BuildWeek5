@@ -15,8 +15,8 @@
                     <th scope="col">Book Title</th>
                     <th scope="col">User Name</th>
                     <th scope="col">Status</th>
-                    <th></th>
-                    <th></th>
+                    <th colspan="3"></th>
+                    
                 </tr>
             </thead>
             <tbody>
@@ -34,6 +34,13 @@
                                 <input type="hidden" name="book_id" value="{{ $res->reservationBook->id }}">
                                 <button disabled type="submit" class="btn btn-danger"><i class="bi bi-trash text-light"></i></button>
                             </form></td>
+                            <td><form method="POST" action="/reservation/{{$res->id}}}">
+                                @csrf
+                                @method('PATCH')
+                                <input type="hidden" name="reservation" value="{{ $res->id }}">
+                                <input type="hidden" name="book_id" value="{{ $res->reservationBook->id }}">
+                                <button type="submit" class="btn btn-primary"><i class="bi bi-calendar-plus text-light"></i></button>
+                            </form></td>
                         @else
                         <td><form method="POST" action="/reservation/{{$res->id}}}">
                                 @csrf
@@ -42,6 +49,15 @@
                                 <input type="hidden" name="book_id" value="{{ $res->reservationBook->id }}">
                                 <button type="submit" class="btn btn-danger"><i class="bi bi-trash text-light"></i></button>
                             </form></td>
+
+                            <td><form method="POST" action="/reservation/{{$res->id}}}">
+                                @csrf
+                                @method('PATCH')
+                                <input type="hidden" name="reservation" value="{{ $res->id }}">
+                                <input type="hidden" name="book_id" value="{{ $res->reservationBook->id }}">
+                                <button disabled type="submit" class="btn btn-primary"><i class="bi bi-calendar-plus text-light"></i></button>
+                            </form></td>
+                        
                         @endif
                         <td>
                         <form method="POST" action="{{ route('reservation.destroy', $res->id) }}">
