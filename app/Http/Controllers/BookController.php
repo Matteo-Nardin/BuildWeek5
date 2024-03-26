@@ -27,6 +27,9 @@ class BookController extends Controller
         //solo i libri formati API
         //return Book::get();
 
+
+        
+
         //libri passati alla vista book, tramite varibalile bookList
         $bookList = Book::paginate(8);
         return view('books' , ['bookList' => $bookList]);
@@ -130,7 +133,7 @@ class BookController extends Controller
         if (!empty($query)) {
             $books = Book::where('title', 'LIKE', "%{$query}%")
                          ->orWhere('author', 'LIKE', "%{$query}%")
-                         ->get();
+                         ->paginate(8);
         } else {
             $books = []; // Restituisci un array vuoto se non c'è una query
         }
