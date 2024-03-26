@@ -5,6 +5,8 @@ use App\Http\Controllers\ReservationController;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\BookController;
+use App\Http\Controllers\UserController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -39,5 +41,7 @@ Route::resource('/reservation', ReservationController::class)->middleware('auth'
 
 //rotta per il fetch di ricerca
 Route::get('/books/search', [BookController::class, 'search']);
+
+Route::resource('/user', UserController::class)->middleware('auth');
 
 require __DIR__.'/auth.php';
