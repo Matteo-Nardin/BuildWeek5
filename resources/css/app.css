@@ -42,23 +42,34 @@ h2:first-of-type {
     background-color :#e3ac06
 }
 
-
+/* Paginazione Frank */
 .pagination-btn {
-    border: 1px solid #007bff; /* Colore blu di bootstrap per esempio */
+    border: 1px solid #e5e7eb;; /* Colore blu di bootstrap per esempio */
+    font-size: 14px;
+    font-weight: 700;
     background-color: white;
-    color: #007bff;
-    padding: 5px 10px;
-    margin: 0 2px;
+    color: #6b7280;
+    padding: 8px;
+    margin: 0px 4px;
     cursor: pointer;
     border-radius: 5px;
 }
 
 .pagination-btn-yellow {
-    border: 1px solid #ffee00; /* Colore blu di bootstrap per esempio */
+    border: 1px solid #e5e7eb;; /* Colore blu di bootstrap per esempio */
+    font-size: 14px;
+    font-weight: 700;
     background-color: white;
-    color: #ff6f00;
-    padding: 5px 10px;
-    margin: 0 2px;
+    color: #6b7280;
+    padding: 8px;
+    margin: 0 4px;
     cursor: pointer;
     border-radius: 5px;
 }
+
+#laravel-pagination{
+    display: flex;
+    justify-content: center;
+}
+
+/* End Paginazione Frank */

@@ -44,11 +44,12 @@
                     </tr>
                 @endforeach
             </tbody>
-        </table>
-        <div class="d-flex margin justify-content-center" id="pagination"></div> <!-- Assicurati di avere questo elemento sotto la tua tabella -->
+        </table> 
+
+        <div class="d-flex  justify-content-center" id="pagination"></div> <!-- Assicurati di avere questo elemento sotto la tua tabella -->
         
             
-        <div id="laravel-pagination">
+        <div id="laravel-pagination" >
             {{ $bookList->links() }}
         </div>
 
@@ -79,6 +80,7 @@ function searchBooks(query, page = 1) {
             const tableBody = document.querySelector('.table tbody');
             tableBody.innerHTML = ''; // Pulisci la tabella dai risultati precedenti
             document.getElementById('laravel-pagination').style.display = 'none';
+            console.log(data);
 
             // Aggiungi i nuovi risultati della ricerca alla tabella
             data.data.forEach((book, index) => {
@@ -104,7 +106,7 @@ function updatePagination(currentPage, totalPages) {
     // Bottoni di paginazione
     if (currentPage > 1) {
         const prevBtn = document.createElement('button');
-        prevBtn.textContent = 'Precedente';
+        prevBtn.textContent = '« Previous';
         prevBtn.classList.add('pagination-btn')
         prevBtn.onclick = () => searchBooks(currentSearchQuery, currentPage - 1); // Passa la query corrente
         pagination.appendChild(prevBtn);
@@ -112,7 +114,7 @@ function updatePagination(currentPage, totalPages) {
 
     if (currentPage < totalPages) {
         const nextBtn = document.createElement('button');
-        nextBtn.textContent = 'Successivo';
+        nextBtn.textContent = 'Next »';
         nextBtn.classList.add('pagination-btn-yellow')
         nextBtn.onclick = () => searchBooks(currentSearchQuery, currentPage + 1); // Passa la query corrente
         pagination.appendChild(nextBtn);
@@ -128,7 +130,7 @@ document.getElementById('book-search').addEventListener('input', function() {
 });
 </script>
 
-<div id="pagination"></div> <!-- Assicurati di avere questo elemento sotto la tua tabella -->
+
 
 
 
