@@ -18,9 +18,11 @@ class ReservationFactory extends Factory
      */
     public function definition(): array
     {
-        $status=['accept','rejected'];
+        //l'admin può cancellare le prenotazioni di qualsiasi utenete
+        //l'utente cancella la prenotazione
+        $status=['effettuata','cancellata'];
         return [
-            'status' => fake()->numberBetween($status),
+            'status' => fake()->randomElement($status),
             'user_id' => User::get()->random()->id,
             'book_id' => Book::get()->random()->id,
         ];
